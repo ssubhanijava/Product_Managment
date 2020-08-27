@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1"/>
+<title>Order-Conformed</title>
+</head>
+<body>
+
+
+	<div class="top-header" align="left">
+		<div class="wrap">
+			<div class="header-right">
+				Welcome:
+				<div align="left">
+					<i class="user"></i> <a href="/cust/loginCustomer">
+					<span  th:text="${user}"></span></a>
+				</div>
+				<div align="right">
+					<i class="user"></i> <a href="/">Logout</a>
+				</div>
+			</div>
+
+		</div>
+		<div class="clearfix"></div>
+	</div>
+
+
+
+	<div style="color: red;" align="center">
+		<h1>Your Order Conformed...</h1>
+
+	</div>
+	<div style="color: blue;" align="center">
+
+		<h4>visit Again....</h4>
+		<h5>Thank You...</h5>
+	</div>
+
+</body>
+</html>

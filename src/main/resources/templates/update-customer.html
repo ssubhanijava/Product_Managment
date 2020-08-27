@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>Update Category</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous" />
+</head>
+
+<body>
+    <div class="container my-5">
+        <h3> Update Customer</h3>
+        <div class="card">
+            <div class="card-body">
+                <div class="col-md-8">
+                    <form action="#" th:action="@{/cust/update/{id}(id=${customer.cid})}" th:object="${customer}" method="post">
+                        <div class="row">
+                        <div class="form-group col-md-8">
+                                <label for="cid" class="col-form-label">CustomerId</label> <input type="text" th:field="*{cid}" class="form-control" id="cid" placeholder="Id" /> 
+                            </div>
+                        
+                            <div class="form-group col-md-6">
+                                <label for="cName" class="col-form-label"></label>CustomerName<input type="text" th:field="*{cName}" class="form-control" id="cName" placeholder="Name" />                 
+                                            </div>
+                            <div class="form-group col-md-8">
+                                <label for="cEmail" class="col-form-label">CustomerEmail</label> <input type="email" th:field="*{cEmail}" class="form-control" id="cEmail" placeholder="Email" /> 
+                            </div>
+                        
+                                <div class="form-group col-md-6">
+                                <label for="cPhone" class="col-form-label"></label>CustomerPhone<input type="text" th:field="*{cPhone}" class="form-control" id="cPhone" placeholder="Phone" />                 
+                                            </div>
+                            <div class="form-group col-md-8">
+                                <label for="cStatus" class="col-form-label">CustomerStatus</label> <input type="text" th:field="*{cStatus}" class="form-control" id="cStatus" placeholder="Status" /> 
+                            </div>
+
+							<div class="form-group col-md-8">
+								<label for="CEnquiryDate" class="col-form-label">CustomerDate</label>
+								<input type="date" th:field="*{CEnquiryDate}" class="form-control"
+									id="CEnquiryDate" placeholder="CustomerDate" />
+							</div>
+
+
+							<div class="form-group col-md-8">
+                                <input type="submit" class="btn btn-primary" value="Update Customer" />
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

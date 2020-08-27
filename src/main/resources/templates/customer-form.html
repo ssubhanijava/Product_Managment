@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8"></meta>
+<meta http-equiv="x-ua-compatible" content="ie=edge"></meta>
+<title>Add Customer</title>
+<meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+	crossorigin="anonymous"></link>
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
+	integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"
+	crossorigin="anonymous"></link>
+<!-- <link rel="stylesheet" href="../css/shards.min.css"> -->
+</head>
+
+<body>
+	<div class="container my-5">
+
+		<div th:if="${param.success}" align="center">
+			<div class="alert alert_info">Customer Registerd
+				Successfull...!</div>
+
+		</div>
+
+
+		<p align="right">
+			<a href="/">Home</a>
+		</p>
+		<br />
+
+		<h3 align="center">Customer-Registration-Form</h3>
+		<div class="card">
+			<div class="card-body">
+				<div class="col-md-10">
+					<form action="#" th:action="@{/cust/add}" th:object="${customer}"
+						method="post">
+						<div class="row">
+
+							<div class="form-group col-md-8">
+								<label for="cName" class="col-form-label">CustomerName</label> <input
+									type="text" th:field="*{cName}" class="form-control" id="cName"
+									placeholder="CustomerName"></input>
+							</div>
+							<div class="form-group col-md-8">
+								<label for="cDescription" class="col-form-label">CustomerEmail</label>
+								<input type="email" th:field="*{cEmail}" class="form-control"
+									id="cEmail" placeholder="CustomerEmail"></input>
+							</div>
+
+							<div class="form-group col-md-8">
+								<label for="cPassWord" class="col-form-label">CustomerPassword</label>
+								<input type="password" th:field="*{cPassWord}"
+									class="form-control" id="cPassWord"
+									placeholder="CustomerPassword"></input>
+							</div>
+							<div class="form-group col-md-8">
+								<label for="cPhone" class="col-form-label">CustomerPhone</label>
+								<input type="text" th:field="*{cPhone}" class="form-control"
+									id="cPhone" placeholder="CustomerPhone"></input>
+							</div>
+							<!-- 	<div class="form-group col-md-8">
+								<label for="cStatus" class="col-form-label">CustomerStatus</label>
+								<input type="text" th:field="*{cStatus}" class="form-control"
+									id="cStatus" placeholder="CustomerStatus"></input>
+							</div> -->
+							<div class="form-group col-md-8">
+								<label for="CEnquiryDate" class="col-form-label">CustomerEnqueryDate</label>
+								<input type="date" th:field="*{CEnquiryDate}"
+									class="form-control" id="CEnquiryDate"
+									placeholder="CustomerEnquiryName"></input>
+							</div>
+
+							<br></br>
+							<!-- 
+							<h2>AddCustomerAddress</h2>
+							<div class="container my-5">
+
+								<div class="card">
+									<div class="card-body">
+										<div class="col-md-10">
+											<div class="row">
+
+												<div th:object="${cAddress}">
+
+
+													<table>
+														<tr>
+															<td>CustomerAddress :</td>
+															<td><p>
+																	<input type="text" th:field="*{adresss}" />
+																</p></td>
+
+
+														</tr>
+														<tr>
+															<td>CustomerCity :</td>
+															<td><p>
+																	<input type="text" th:field="*{city}" />
+																</p></td>
+														</tr>
+														<tr>
+															<td>CustomerDistrict :</td>
+															<td><p>
+																	<input type="text" th:field="*{district}" />
+																</p></td>
+														</tr>
+														<tr>
+															<td>CustomerState :</td>
+															<td><p>
+																	<input type="text" th:field="*{State}" />
+																</p></td>
+														</tr>
+														<tr>
+															<td>PinCode :</td>
+															<td><p>
+																	<input type="text" th:field="*{pincode}" />
+																</p></td>
+														</tr>
+														
+														<td>
+														<a
+															th:href="@{/cust/delete/{id}(id=${customer.cid})}"
+															class="btn btn-primary">ClickHereAddingAddress</a>
+															</td>
+
+
+													</table>
+
+
+
+													
+
+													<p>
+														CustomerAddress: <input type="text" th:field="*{adresss}" />
+													</p>
+													<p>
+														CustomerCity: <input type="text" th:field="*{city}" />
+													</p>
+													<p>
+														CustomerDistrict: <input type="text"
+															th:field="*{district}" />
+													</p>
+													<p>
+														CustomerState: <input type="text" th:field="*{State}" />
+													</p>
+													<p>
+														CustomerPinCode: <input type="text" th:field="*{pincode}" />
+													</p>
+
+														
+						
+														<div class="form-group col-md-8">
+															<label for="adresss" class="col-form-label">CustomerAddress</label>
+															<input type="text" th:field="*{adresss}"
+																class="form-control" id="adresss"
+																placeholder="CustomerAddress"></input>
+														</div>
+
+														<div class="form-group col-md-8">
+															<label for="city" class="col-form-label">CustomerCity</label>
+															<input type="text" th:field="*{city}"
+																class="form-control" id="city"
+																placeholder="CustomerCity"></input>
+														</div>
+														<div class="form-group col-md-8">
+															<label for="district" class="col-form-label">CustomerDistrict</label>
+															<input type="text" th:field="*{district}"
+																class="form-control" id="district"
+																placeholder="CustomerDistrict"></input>
+														</div>
+														<div class="form-group col-md-8">
+															<label for="State" class="col-form-label">CustomerState</label>
+															<input type="text" th:field="*{State}"
+																class="form-control" id="State"
+																placeholder="CustomerState"></input>
+														</div>
+														<div class="form-group col-md-8">
+															<label for="pincode" class="col-form-label">CustomerPincode</label>
+															<input type="text" th:field="*{pincode}"
+																class="form-control" id="pincode"
+																placeholder="CustomerPinCode"></input>
+														</div>
+
+												</div>
+
+											</div>
+
+										</div>
+									</div>
+								</div>
+								<div class="form-group col-md-8"></div>
+							</div> -->
+
+							<div class="col-md-6">
+								<input type="submit" class="btn btn-primary"
+									value="Add Customer"></input>
+							</div>
+
+							<div class="form-group col-md-8"></div>
+
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>
