@@ -53,9 +53,9 @@ public class ProceedController {
 		System.out.println("Login User........ " + user);
 		map.addAttribute("User", user);
 		Customer customer = customerService.findByCname(user);
-		List<Address> getcAddress = customer.getcAddress();
+		List<Address> getcAddress = customer.getAddress();
 
-		System.out.println(customer);
+	//	System.out.println(customer);
 		map.addAttribute("cAddress", getcAddress);
 
 		return "one";
@@ -126,17 +126,18 @@ public class ProceedController {
 
 		Customer customer = customerService.findByCname(user);
 		address.setCustomer(customer);
+		List<Address> addre = customer.getAddress();
 
-		System.out.println("User----------- Adding Adddress :- " + customer);
-		if (customer.getcAddress() == null) {
+		//System.out.println("User----------- Adding Adddress :- " + customer);
+		if (customer.getAddress() == null) {
 			addree.add(address);
 
 		} else {
-			addree.add(address);
+			addre.add(address);
 		}
 
-		customer.setcAddress(addree);
-		customerService.registerCustomer(customer);
+		customer.setAddress(addre);
+		customerService.saveAddressCustomer(customer);
 		// customerService.saveAddress(customer);
 
 		List<String> pros = (List<String>) request.getSession().getAttribute("pros");
@@ -151,8 +152,9 @@ public class ProceedController {
 			listpro.add(pr);
 		}
 		
+		List<Address> addre1 = customer.getAddress();
 	
-		System.out.println("List Of Items........." + listpro);
+		//System.out.println("List Of Items........." + listpro);
 
 		map.addAttribute("user", user);
 		map.addAttribute("listPros", listpro);

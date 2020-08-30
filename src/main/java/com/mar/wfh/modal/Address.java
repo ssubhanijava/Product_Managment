@@ -111,10 +111,18 @@ public class Address {
 		this.customer = customer;
 	}
 
+
 	@Override
 	public String toString() {
 		return "Address [aId=" + aId + ", adresss=" + adresss + ", city=" + city + ", district=" + district + ", State="
-				+ State + ", pincode=" + pincode + ", customer=" + customer + "]";
+				+ State + ", pincode=" + pincode + "]";
 	}
+
+	/*
+	 * @Override public String toString() { return "Address [aId=" + aId +
+	 * ", adresss=" + adresss + ", city=" + city + ", district=" + district +
+	 * ", State=" + State + ", pincode=" + pincode + ", customer=" + customer + "]";
+	 * }
+	 */
 
 }

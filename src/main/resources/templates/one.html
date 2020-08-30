@@ -16,26 +16,13 @@
 <meta name="keywords"
 	content="BOX SHOP Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template, 
 Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
-<script type="application/x-javascript">
+<!-- <script type="application/x-javascript">
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	
 	 addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } 
 
-
-
-
-
-
-</script>
+</script> -->
 <!--webfont-->
 <link
 	href='http://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic'
@@ -176,13 +163,25 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<p colspan="4">
 							<span style="color: red">No address available</span>
 						</p>
-						<hr/>
+						<hr />
 					</div>
-					
-					
+
+
+					<div th:if=" !${cAddress.empty}" align="center">
+						<p colspan="4"><h2 style="color: red;">please Select Address To Deliver</h2></p>
+
+
+
+
+						<hr />
+					</div>
+
+
+
 					<div align="center" th:each=" cat: ${cAddress}">
-					<h2 style="color: red;">please Select Some address</h2>
-					
+
+
+						<hr />
 						<p style="color: red;">
 							Address <span th:text="${cat.adresss}"></span>
 						</p>
@@ -200,8 +199,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						</p>
 
 						<button style="color: blue;">
-					    <a th:href="@{/selectAdd/{id}(id=${cat.aId})}"
-											class="btn btn-primary">SelectDeliverAddress</a>
+							<a th:href="@{/selectAdd/{id}(id=${cat.aId})}"
+								class="btn btn-primary">SelectDeliverAddress</a>
 						</button>
 
 						<hr style="width: 20%; text-align: center;" />
@@ -244,13 +243,20 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						</div>
 					</div> -->
 
-					<div class="sign-up-right" align="right">
-						<a href="/addAddresss">ClickHereToAddNewAddress</a>
-					</div>
+
+				
+					 <div  align="right">
+					<a href="/addAddresss">ClickHereToAddNewAddress</a>
+				</div> 
+
+
 
 					<div class="clearfix"></div>
 				</div>
 
+				<!-- <div class="sign-up-right" align="right">
+					<a href="/addAddresss">ClickHereToAddNewAddress</a>
+				</div> -->
 
 			</div>
 

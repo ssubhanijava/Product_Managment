@@ -23,35 +23,34 @@ public class CustomerService {
 	@Autowired
 	private RoleDao roleDao;
 
-	
 	public Customer findByEmail(String email) {
 		return customerDao.findByCEmail(email);
 	}
-	
+
 	public Customer findByCname(String name) {
-		
-	return	customerDao.getCustomerBycName(name);
+
+		return customerDao.getCustomerBycName(name);
 	}
-	
-	
-	
+
 	public Customer registerCustomer(Customer customer) {
-		
-		Set<Role> roles=new HashSet<>();
-		Role role= new Role();
+
+		Set<Role> roles = new HashSet<>();
+		Role role = new Role();
 		role.setRoleName("USER");
-		
+
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		String getcPassWord = customer.getcPassWord();
 		String encodePassword = encoder.encode(getcPassWord);
 
 		customer.setcPassWord(encodePassword);
 		customer.setcStatus(true);
-		//role.setRoleName("USER");
+		// role.setRoleName("USER");
 		customer.setRoles(role);
-		
-	/*	Role customerRole = roleDao.findByRoleName("ADMIN");
-		customer.setRoles(new HashSet<Role>(Arrays.asList(customerRole)));*/
+
+		/*
+		 * Role customerRole = roleDao.findByRoleName("ADMIN"); customer.setRoles(new
+		 * HashSet<Role>(Arrays.asList(customerRole)));
+		 */
 
 		return customerDao.save(customer);
 	}
@@ -78,9 +77,14 @@ public class CustomerService {
 	}
 
 	public void saveAddress(Customer customer) {
-		
+
 		customerDao.save(customer);
-		
+
+	}
+
+	public void saveAddressCustomer(Customer customer) {
+
+		customerDao.save(customer);
 	}
 
 }

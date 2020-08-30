@@ -144,7 +144,7 @@ public final class CustomerController {
 		
 		String remoteUser = request.getRemoteUser();
 		Customer customer = customerService.findByCname(remoteUser);
-		List<Address> address = customer.getcAddress();
+		List<Address> address = customer.getAddress();
 		
 		map.addAttribute("address", address);
 	

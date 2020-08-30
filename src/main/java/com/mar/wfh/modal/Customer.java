@@ -1,24 +1,32 @@
 package com.mar.wfh.modal;
 
 import java.sql.Date;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
-import org.hibernate.annotations.DynamicUpdate;
-import org.hibernate.validator.constraints.*;
-
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name = "Customer_Tbl")
-@DynamicUpdate(true)
+//@DynamicUpdate(true)
 public class Customer {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "Customer_id", length = 20)
+	@Column(name = "Customer_ID", length = 20)
 	private Integer cid;
 	@Column(name = "Customer_Name", length = 50)
 	@Length(min = 5, message = "*Your Customer name must have at least 5 characters")
@@ -40,13 +48,12 @@ public class Customer {
 	private Date CEnquiryDate;
 
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinTable(name = "customer_role", 
-	joinColumns = {@JoinColumn(name = "Customer_id")}, 
-	inverseJoinColumns = {@JoinColumn(name = "role_id")})
+	@JoinTable(name = "customer_role", joinColumns = { @JoinColumn(name = "Customer_ID") }, inverseJoinColumns = {
+			@JoinColumn(name = "role_id") })
 	private Role roles;
 
 	@OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
-	private List<Address> cAddress;
+	private List<Address> address;
 
 	public Customer() {
 		super();
@@ -117,24 +124,19 @@ public class Customer {
 		CEnquiryDate = cEnquiryDate;
 	}
 
-	public List<Address> getcAddress() {
-		return cAddress;
+	public List<Address> getAddress() {
+		return address;
 	}
 
-	public void setcAddress(List<Address> cAddress) {
-		this.cAddress = cAddress;
+	public void setAddress(List<Address> address) {
+		this.address = address;
 	}
 
-	/*
-	 * public Set<Role> getRoles() { return roles; }
-	 * 
-	 * public void setRoles(Set<Role> roles) { this.roles = roles; }
-	 */
 	@Override
 	public String toString() {
 		return "Customer [cid=" + cid + ", cName=" + cName + ", cEmail=" + cEmail + ", cPassWord=" + cPassWord
-				+ ", cPhone=" + cPhone + ", cStatus=" + cStatus + ", CEnquiryDate=" + CEnquiryDate + ", cAddress="
-				+ cAddress + "]";
+				+ ", cPhone=" + cPhone + ", cStatus=" + cStatus + ", CEnquiryDate=" + CEnquiryDate + ", roles=" + roles
+				+ ", address=" + address + "]";
 	}
 
 }
