@@ -1,9 +1,11 @@
 package com.mar.wfh.controller;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
-import java.util.Map.Entry;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -20,7 +22,6 @@ import com.mar.wfh.modal.product;
 import com.mar.wfh.services.CategoryService;
 import com.mar.wfh.services.ProductService;
 import com.mar.wfh.services.SubCategoryService;
-import com.sun.javafx.collections.MappingChange.Map;
 
 @Controller
 public class ShowingListOfCart {
@@ -56,25 +57,66 @@ public class ShowingListOfCart {
 		List<String> pros = (List<String>) request.getSession().getAttribute("pros");
 
 		List<product> listpro = new ArrayList<>();
+
 		for (int i = 0; i < pros.size(); i++) {
 
-			
 			String pro = pros.get(i);
 			product product = productService.getProductByName(pro);
 			Integer pid = product.getPid();
 			product pr = productService.findProuctById(pid);
 			listpro.add(pr);
 		}
-		Item item = new Item();
 
-		HashMap<product, Integer> counts = new HashMap<product, Integer>();
+		/*
+		 * HashMap<product, Integer> counts = new HashMap<product, Integer>();
+		 * 
+		 * for (product str : listpro) { if (counts.containsKey(str)) { counts.put(str,
+		 * counts.get(str) + item.getQuantity() + 1); } else { counts.put(str, 1); } }
+		 */
 
-		for (product str : listpro) {
-			if (counts.containsKey(str)) {
-				counts.put(str, counts.get(str) + item.getQuantity() + 1);
+		// Item item = new Item();
+		List<Item> Itemlist = new ArrayList<>();
+		Set<product> p = new HashSet<product>(listpro);
+
+		for (product pr : p) {
+			Item item = new Item();
+
+			int frequency = Collections.frequency(listpro, pr);
+			if (frequency > 1) {
+
+				if (Itemlist != null) {
+					System.out.println(pr + "::" + frequency);
+					item.setProduct(pr);
+					item.setQuantity(frequency);
+					Itemlist.add(item);
+
+				} else {
+					System.out.println(pr + "::" + frequency);
+
+					item.setProduct(pr);
+					item.setQuantity(frequency);
+					Itemlist.add(item);
+				}
+
+				// System.out.println( frequency);
+
 			} else {
-				counts.put(str, 1);
+				System.out.println(pr + "::" + frequency);
+				Item item1 = new Item();
+				item1.setProduct(pr);
+				item1.setQuantity(frequency);
+				Itemlist.add(item1);
 			}
+
+		}
+
+		System.out.println("--------" + Itemlist.size());
+
+		Iterator<Item> iterator = Itemlist.iterator();
+		while (iterator.hasNext()) {
+			Item items = (Item) iterator.next();
+			System.out.println("========" + items.getProduct().getpSubCat() + ":::" + items.getQuantity() + "=======");
+
 		}
 
 		/*
@@ -87,7 +129,7 @@ public class ShowingListOfCart {
 		 * }
 		 */
 
-		map.addAttribute("prosList", listpro);
+		map.addAttribute("prosList", Itemlist);
 
 		System.out.println(pros);
 
@@ -119,8 +161,6 @@ public class ShowingListOfCart {
 		System.out.println(pros.remove(name));
 		pros.remove(name);
 		request.getSession().setAttribute("pros", pros);
-
-		
 
 		// ProductMaster proMaster=productService.getProductByName(name);
 
