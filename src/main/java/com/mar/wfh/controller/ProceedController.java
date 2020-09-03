@@ -1,7 +1,11 @@
 package com.mar.wfh.controller;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -17,7 +21,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.mar.wfh.modal.Address;
 import com.mar.wfh.modal.Customer;
+import com.mar.wfh.modal.Item;
 import com.mar.wfh.modal.ModeOfPayments;
+import com.mar.wfh.modal.Order;
 import com.mar.wfh.modal.product;
 import com.mar.wfh.services.AddressService;
 import com.mar.wfh.services.CategoryService;
@@ -55,7 +61,7 @@ public class ProceedController {
 		Customer customer = customerService.findByCname(user);
 		List<Address> getcAddress = customer.getAddress();
 
-	//	System.out.println(customer);
+		// System.out.println(customer);
 		map.addAttribute("cAddress", getcAddress);
 
 		return "one";
@@ -83,9 +89,11 @@ public class ProceedController {
 		return "add_customer_Address";
 	}
 
+	@SuppressWarnings("null")
 	@GetMapping("/selectAdd/{id}")
 	public String selectOneOfAddress(@PathVariable("id") Integer id, ModelMap map, HttpServletRequest request) {
 
+		int sum = 0;
 		String user = request.getRemoteUser();
 
 		Customer customer = customerService.findByCname(user);
@@ -105,7 +113,99 @@ public class ProceedController {
 		}
 		System.out.println("List Of Items........." + listpro);
 
+		List<Item> Itemlist = new ArrayList<>();
+		Set<product> p = new HashSet<product>(listpro);
+
+		for (product pr : p) {
+			Item item = new Item();
+
+			int frequency = Collections.frequency(listpro, pr);
+			if (frequency > 1) {
+
+				if (Itemlist != null) {
+					System.out.println(pr + "::" + frequency);
+					item.setProduct(pr);
+					item.setQuantity(frequency);
+					Itemlist.add(item);
+					sum += item.getProduct().getpPrice() * item.getQuantity();
+
+				} else {
+					System.out.println(pr + "::" + frequency);
+
+					item.setProduct(pr);
+					item.setQuantity(frequency);
+					Itemlist.add(item);
+					sum += item.getProduct().getpPrice() * item.getQuantity();
+				}
+
+				// System.out.println( frequency);
+
+			} else {
+				System.out.println(pr + "::" + frequency);
+				Item item1 = new Item();
+				item1.setProduct(pr);
+				item1.setQuantity(frequency);
+				Itemlist.add(item1);
+				sum += item1.getProduct().getpPrice() * item1.getQuantity();
+			}
+
+		}
+
+		System.out.println("--------" + Itemlist.size());
+
+		List<Order> listOrders = new ArrayList<Order>();
+		Order order = new Order();
+		Order order1 = new Order();
+		Iterator<Item> iterator = Itemlist.iterator();
+
+		while (iterator.hasNext()) {
+			Item items = (Item) iterator.next();
+
+			if (items.getQuantity() > 1) {
+
+				if (listOrders == null) {
+
+					order.setProductName(items.getProduct().getpName());
+					order.setQuantity(items.getQuantity());
+					order.setPriceEach(items.getProduct().getpPrice());
+					listOrders.add(order);
+
+				} else {
+
+					order1.setProductName(items.getProduct().getpName());
+					order1.setQuantity(items.getQuantity());
+					order1.setPriceEach(items.getProduct().getpPrice());
+					listOrders.add(order1);
+
+				}
+
+			} else {
+				if (listOrders == null) {
+
+					order.setProductName(items.getProduct().getpName());
+					order.setQuantity(items.getQuantity());
+					order.setPriceEach(items.getProduct().getpPrice());
+					listOrders.add(order);
+				} else {
+
+					order1.setProductName(items.getProduct().getpName());
+					order1.setQuantity(items.getQuantity());
+					order1.setPriceEach(items.getProduct().getpPrice());
+					listOrders.add(order1);
+
+				}
+
+			}
+			System.out.println("========" + items.getProduct().getpSubCat() + ":::" + items.getQuantity() + "=======");
+
+		}
+
+		System.out.println("-=================-=-=-=-" + sum);
+
+		map.addAttribute("listOfItems", Itemlist);
+		map.addAttribute("listOfOrders", listOrders);
 		map.addAttribute("user", user);
+		map.addAttribute("subtotal", sum);
 		map.addAttribute("listPros", listpro);
 		map.addAttribute("cAddress", address);
 
@@ -124,11 +224,13 @@ public class ProceedController {
 		List<Address> addree = new ArrayList<>();
 		String user = request.getRemoteUser();
 
+		int sum = 0;
+
 		Customer customer = customerService.findByCname(user);
 		address.setCustomer(customer);
 		List<Address> addre = customer.getAddress();
 
-		//System.out.println("User----------- Adding Adddress :- " + customer);
+		// System.out.println("User----------- Adding Adddress :- " + customer);
 		if (customer.getAddress() == null) {
 			addree.add(address);
 
@@ -151,12 +253,104 @@ public class ProceedController {
 			product pr = productService.findProuctById(pid);
 			listpro.add(pr);
 		}
-		
+
 		List<Address> addre1 = customer.getAddress();
-	
-		//System.out.println("List Of Items........." + listpro);
+
+		// System.out.println("List Of Items........." + listpro);
+
+		List<Item> Itemlist = new ArrayList<>();
+		Set<product> p = new HashSet<product>(listpro);
+
+		for (product pr : p) {
+			Item item = new Item();
+
+			int frequency = Collections.frequency(listpro, pr);
+			if (frequency > 1) {
+
+				if (Itemlist != null) {
+					System.out.println(pr + "::" + frequency);
+					item.setProduct(pr);
+					item.setQuantity(frequency);
+					Itemlist.add(item);
+					sum += item.getProduct().getpPrice() * item.getQuantity();
+
+				} else {
+					System.out.println(pr + "::" + frequency);
+
+					item.setProduct(pr);
+					item.setQuantity(frequency);
+					Itemlist.add(item);
+					sum += item.getProduct().getpPrice() * item.getQuantity();
+				}
+
+				// System.out.println( frequency);
+
+			} else {
+				System.out.println(pr + "::" + frequency);
+				Item item1 = new Item();
+				item1.setProduct(pr);
+				item1.setQuantity(frequency);
+				Itemlist.add(item1);
+				sum += item1.getProduct().getpPrice() * item1.getQuantity();
+			}
+
+		}
+
+		System.out.println("--------" + Itemlist.size());
+
+		List<Order> listOrders = new ArrayList<Order>();
+		Order order = new Order();
+		Order order1 = new Order();
+		Iterator<Item> iterator = Itemlist.iterator();
+
+		while (iterator.hasNext()) {
+			Item items = (Item) iterator.next();
+
+			if (items.getQuantity() > 1) {
+
+				if (listOrders == null) {
+
+					order.setProductName(items.getProduct().getpName());
+					order.setQuantity(items.getQuantity());
+					order.setPriceEach(items.getProduct().getpPrice());
+					listOrders.add(order);
+
+				} else {
+
+					order1.setProductName(items.getProduct().getpName());
+					order1.setQuantity(items.getQuantity());
+					order1.setPriceEach(items.getProduct().getpPrice());
+					listOrders.add(order1);
+
+				}
+
+			} else {
+				if (listOrders == null) {
+
+					order.setProductName(items.getProduct().getpName());
+					order.setQuantity(items.getQuantity());
+					order.setPriceEach(items.getProduct().getpPrice());
+					listOrders.add(order);
+				} else {
+
+					order1.setProductName(items.getProduct().getpName());
+					order1.setQuantity(items.getQuantity());
+					order1.setPriceEach(items.getProduct().getpPrice());
+					listOrders.add(order1);
+
+				}
+
+			}
+			System.out.println("========" + items.getProduct().getpSubCat() + ":::" + items.getQuantity() + "=======");
+
+		}
+
+		System.out.println("-=================-=-=-=-" + sum);
+
+		map.addAttribute("listOfItems", Itemlist);
 
 		map.addAttribute("user", user);
+		map.addAttribute("subtotal", sum);
 		map.addAttribute("listPros", listpro);
 		map.addAttribute("cAddress", address);
 
