@@ -22,7 +22,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	
 	
 	
+	
+	
 	 addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } 
+
+
 
 
 
@@ -247,7 +251,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 					<div class="grid_1_of_4 images_1_of_4" th:each="pro: ${prosList}">
 						<a href="single.html"><img
-							th:attr="src=@{${pro.getProduct().productImage}}" alt=""  width="200"></img></a>
+							th:attr="src=@{${pro.getProduct().productImage}}" alt=""
+							width="200"></img></a>
 						<h2 th:text="${pro.getProduct().pName}"></h2>
 						<p th:text="${pro.getProduct().pSpec}"></p>
 						<p>
@@ -264,11 +269,19 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						</div> -->
 
 						<div class="button">
-							<span><a th:href="@{/remove/{id}(id=${pro.getProduct().pName})}"
+							<span><a
+								th:href="@{/remove/{id}(id=${pro.getProduct().pName})}"
 								class="details">Remove</a></span>
 						</div>
 
-						Quantity: <p th:text="${pro.quantity}"></p>
+						<div>
+							
+								
+								<div>
+									Quantity:<h3><p style="color: red;" th:text="${pro.quantity}"></p></h3>
+								</div>
+							
+						</div>
 
 
 					</div>

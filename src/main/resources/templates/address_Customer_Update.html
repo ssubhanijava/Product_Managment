@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="x-ua-compatible" content="ie=edge" />
+<title>Update Address</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+	crossorigin="anonymous" />
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
+	integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"
+	crossorigin="anonymous" />
+</head>
+
+<body>
+	<div class="container my-5">
+		<h3>Update Address</h3>
+		<div class="card">
+			<div class="card-body">
+				<div class="col-md-8">
+					<form action="#"
+						th:action="@{/addr/update/{id}(id=${address.aId})}"
+						th:object="${address}" method="post">
+						<div class="row">
+							<div class="form-group col-md-8">
+								<label for="aId" class="col-form-label">AddressId</label> <input
+									type="text" th:field="*{aId}" class="form-control" id="aId"
+									placeholder="Id" />
+							</div>
+
+							<div class="form-group col-md-6">
+								<label for="adresss" class="col-form-label"></label>Address<input
+									type="text" th:field="*{adresss}" class="form-control"
+									id="adresss" placeholder="Address" />
+							</div>
+							<div class="form-group col-md-8">
+								<label for="city" class="col-form-label">City</label> <input
+									type="text" th:field="*{city}" class="form-control" id="city"
+									placeholder="City" />
+							</div>
+							<div class="form-group col-md-8">
+								<label for="district" class="col-form-label">District</label> <input
+									type="text" th:field="*{district}" class="form-control"
+									id="district" placeholder="District" />
+							</div>
+							<div class="form-group col-md-8">
+								<label for="State" class="col-form-label">State</label> <input
+									type="text" th:field="*{State}" class="form-control" id="State"
+									placeholder="State" />
+							</div>
+							<div class="form-group col-md-8">
+								<label for="pincode" class="col-form-label">PinCode</label> <input
+									type="text" th:field="*{pincode}" class="form-control"
+									id="pincode" placeholder="PinCode" />
+							</div>
+
+							<div class="form-group col-md-8">
+								<input type="submit" class="btn btn-primary"
+									value="Update Address" />
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>

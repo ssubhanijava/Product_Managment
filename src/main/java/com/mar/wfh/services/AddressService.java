@@ -51,4 +51,9 @@ public class AddressService {
 		return addressDao.save(address);
 	}
 
+	public void deleteAddress(Address address) {
+		addressDao.delete(address);
+
+	}
+
 }
