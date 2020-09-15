@@ -95,9 +95,24 @@ table {
 }
 </style>
 </head>
-<body>
 
-	<!-- <div align="left">
+<div class="top-header">
+	<div class="wrap">
+		<div class="header-right">
+			Welcome:
+			<div align="left">
+				<i class="user"></i> <a href="/cust/loginCustomer"><span
+					th:text="${user}"></span></a>
+			</div>
+			<div align="right">
+				<i class="user"></i> <a href="/">Logout</a>
+			</div>
+		</div>
+
+	</div>
+	<div class="clearfix"></div>
+</div>
+<!-- <div align="left">
 	SubTotal:
 	<div align="left">
 		<h3><span th:text="${subTotal}"></span></h3>
@@ -105,37 +120,23 @@ table {
 </div> -->
 
 
-	<div class="top-header" align="left">
-		<div class="wrap">
-			<div class="header-right">
-				Welcome:
-				<div align="left">
-					<i class="user"></i> <a href="/cust/loginCustomer"> <span
-						th:text="${user}"></span></a>
-				</div>
-				<div align="right">
-					<i class="user"></i> <a href="/">Logout</a>
-				</div>
-			</div>
 
-		</div>
-		<div class="clearfix"></div>
-	</div>
+<div>
+	<br></br>
+	<h4 align="left" style="color: red;">PaymentMode</h4>
+	Select Methods: <select>
+
+		<option value="0">Select Payment</option>
+		<option value="1">Cod</option>
+		<option value="2">Credit/Debit Card</option>
 
 
+	</select>
+</div>
+<div style="color: red;" align="right">
+	<a href="/placeOrder">ClickHereForConfirm</a>
+</div>
 
-	<div style="color: red;" align="center">
-		<h1>Your Order Conformed...</h1>
-
-	</div>
-	<div style="color: blue;" align="center">
-
-		<h4>visit Again....</h4>
-		<br></br>
-		<h5>Thank You...</h5>
-	</div>
-
-</body>
 </html>
 
 

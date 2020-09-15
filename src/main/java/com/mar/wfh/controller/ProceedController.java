@@ -35,6 +35,8 @@ import com.mar.wfh.services.SubCategoryService;
 //@RequestMapping("/proced")
 public class ProceedController {
 
+	int subTotal;
+
 	@Autowired
 	private ProductService productService;
 
@@ -215,6 +217,7 @@ public class ProceedController {
 		 * map.addAttribute("address", getcAddress);
 		 */
 
+		subTotal = sum;
 		return "Confirm";
 	}
 
@@ -370,6 +373,15 @@ public class ProceedController {
 		map.addAttribute("user", user);
 
 		return "order_conformed";
+	}
+
+	@GetMapping("/payMentMethods")
+	public String paymentsMethod(ModelMap map, HttpServletRequest request) {
+
+		String user = request.getRemoteUser();
+		map.addAttribute("user", user);
+		map.addAttribute("subTotal", subTotal);
+		return "payments_options";
 	}
 
 }
